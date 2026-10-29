@@ -1,7 +1,3 @@
-"""1) Controle de clientes e veículos.
-
-COMBINAÇÃO: Lista de clientes, onde cada cliente contém uma Lista de veículos.
-"""
 from estruturas import Lista
 
 
@@ -18,7 +14,7 @@ class Cliente:
         self.nome = nome
         self.cpf = cpf
         self.telefone = telefone
-        self.veiculos = Lista()  # sem limite de veículos
+        self.veiculos = Lista()
 
 
 class ControleClientes:
@@ -27,7 +23,7 @@ class ControleClientes:
 
     def cadastrar_cliente(self, nome, cpf, telefone):
         if self.buscar_por_cpf(cpf) is not None:
-            return None  # CPF já cadastrado
+            return None
         cliente = Cliente(nome, cpf, telefone)
         self.clientes.adicionar(cliente)
         return cliente
@@ -36,7 +32,6 @@ class ControleClientes:
         return self.clientes.buscar(lambda c: c.cpf == cpf)
 
     def buscar_por_placa(self, placa):
-        """Percorre a lista de clientes e, dentro de cada um, a lista de veículos."""
         for cliente in self.clientes:
             veiculo = cliente.veiculos.buscar(lambda v: v.placa == placa)
             if veiculo is not None:
@@ -51,7 +46,7 @@ class ControleClientes:
         if cliente is None:
             return None
         if self.buscar_por_placa(placa)[0] is not None:
-            return None  # placa já cadastrada
+            return None
         veiculo = Veiculo(placa, modelo, marca, ano)
         cliente.veiculos.adicionar(veiculo)
         return veiculo
